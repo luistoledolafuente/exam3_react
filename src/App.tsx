@@ -5,10 +5,11 @@ import Entities from './pages/Entities';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <Navbar />
       
-      <main className="container mx-auto p-4">
+      {/* El padding ahora está en cada PÁGINA */}
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/entities" element={<Entities />} />

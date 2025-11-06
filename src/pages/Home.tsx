@@ -1,27 +1,48 @@
-import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useFetchData } from '../hooks/useFetchData';
+import { getUsers } from '../services/apiClient';
+import type { IUser } from '../types';
+import { UserCard } from '../components/UserCard';
+import { SkeletonCard } from '../components/SkeletonCard';
 
-// 1. Definimos la interfaz para los datos del usuario
-interface IUser {
-  id: number;
-  name: string;
-  username: string;
-}
+// --- Variantes de Animación ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+// ------------------------------
 
 const Home = () => {
-  // 2. Tipamos el estado como un array de IUser
-  const [users, setUsers] = useState<IUser[]>([]);
+  const { data: users, loading, error } = useFetchData<IUser[]>(getUsers);
 
-  useEffect(() => {
-    // Req 2: Consumo de API
-    fetch('https://jsonplaceholder.typicode.com/users?_limit=8')
-      .then(response => response.json())
-      .then(data => setUsers(data as IUser[])) // 3. Hacemos un cast del 'any' de json()
-      .catch(error => console.error('Error fetching users:', error));
-  }, []);
+  // Función para renderizar Skeletons
+  const renderSkeletons = () => (
+    Array.from({ length: 8 }).map((_, index) => (
+      <SkeletonCard key={index} />
+    ))
+  );
 
   return (
-    <div>
-      {/* Req 3: Hero */}
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="container mx-auto py-4 px-4"
+    >
+      {/* Hero */}
       <section className="text-center p-10 my-8 bg-white rounded-lg shadow-lg">
         <h1 className="text-5xl font-bold text-blue-700 mb-3">JSONPlaceholder Feed</h1>
         <p className="text-lg text-gray-600">
@@ -29,23 +50,34 @@ const Home = () => {
         </p>
       </section>
 
-      {/* Req 3: Listado simple de "personajes" (usuarios) */}
       <section>
         <h2 className="text-3xl font-semibold mb-4 text-gray-800">Listado de Usuarios</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {users.length > 0 ? (
-            users.map(user => (
-              <div key={user.id} className="bg-white rounded-lg shadow p-4">
-                <p className="font-bold text-lg text-blue-600">{user.name}</p>
-                <p className="text-sm text-gray-500">@{user.username}</p>
-              </div>
-            ))
-          ) : (
-            <p>Cargando usuarios...</p>
-          )}
-        </div>
+        
+        {error && <p className="text-center text-red-500">Error: {error.message}</p>}
+        
+        {/* 👇 AQUÍ ESTÁ EL ARREGLO 👇 */}
+        {loading ? (
+          // 1. Si está cargando, muestra los Skeletons (sin animación)
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {renderSkeletons()}
+          </div>
+        ) : (
+          // 2. Cuando la carga TERMINA, muestra el contenedor animado
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {users?.map(user => (
+              <motion.div key={user.id} variants={itemVariants}>
+                <UserCard user={user} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </section>
-    </div>
+    </motion.div>
   );
 };
 
