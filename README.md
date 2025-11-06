@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# 🚀 JSONPlaceholder Feed (jsonfeed-react)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web moderna construida con React, TypeScript y Vite que consume la API pública de JSONPlaceholder. Muestra un listado de usuarios y posts con una interfaz de usuario limpia, animaciones y un estado de carga optimizado (skeleton loading).
 
-Currently, two official plugins are available:
+## 🔗 Despliegue y Video
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Deploy en Vercel/Netlify:** **https://exam3-react-sage.vercel.app/**
+* **Video Demostrativo (YouTube):** **https://youtu.be/bC4H9k6hEfc**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Características Principales
 
-## Expanding the ESLint configuration
+* **Navegación Fluida:** Carga de componentes por ruta usando `react-router-dom`.
+* **Diseño Sofisticado:** Interfaz moderna con TailwindCSS y animaciones `framer-motion`.
+* **UX Optimizada:** Muestra "Skeleton Loaders" (pantallas de esqueleto) mientras se obtienen los datos.
+* **Efecto "Stagger":** Las tarjetas de datos aparecen en cascada para un efecto visual agradable.
+* **Código Escalable:** Estructura de proyecto limpia que separa la lógica de API (servicios), estado (hooks) y tipos (TypeScript).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tecnologías Utilizadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* **React** (con TypeScript)
+* **Vite** (Bundler y servidor de desarrollo)
+* **TailwindCSS** (Framework de estilos)
+* **React Router** (Manejo de rutas)
+* **Framer Motion** (Para animaciones)
+* **React Icons** (Iconos)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🏁 Pasos para Ejecutar Localmente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Sigue estos pasos para levantar el proyecto en tu máquina local.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/luistoledolafuente/exam3_react.git
+    ```
+
+2.  **Navegar a la carpeta del proyecto:**
+    ```bash
+    cd jsonfeed-react
+    ```
+
+3.  **Instalar dependencias:**
+    (Asegúrate de tener Node.js instalado)
+    ```bash
+    npm install
+    ```
+
+4.  **Ejecutar el servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+
+5.  **Abrir en el navegador:**
+    Abre `http://localhost:5173` (o el puerto que te indique la terminal) en tu navegador.
