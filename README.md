@@ -5,7 +5,7 @@ Una aplicación web moderna construida con React, TypeScript y Vite que consume 
 ## 🔗 Despliegue y Video
 
 * **Deploy en Vercel/Netlify:** **https://exam3-react-sage.vercel.app/**
-* **Video Demostrativo (YouTube):** **https://youtu.be/bC4H9k6hEfc**
+* **Video Demostrativo (YouTube):** **https://youtu.be/gSHHtMGm3Is**
 
 ---
 
@@ -41,7 +41,7 @@ Sigue estos pasos para levantar el proyecto en tu máquina local.
 
 2.  **Navegar a la carpeta del proyecto:**
     ```bash
-    cd jsonfeed-react
+    cd exam3_react
     ```
 
 3.  **Instalar dependencias:**
